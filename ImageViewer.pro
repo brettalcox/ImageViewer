@@ -12,9 +12,13 @@ TARGET = ImageViewer
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        image.cpp
+SOURCES += main.cpp \
+    image.cpp \
+    zoom.cpp
 
-HEADERS  += image.h
+HEADERS  += \
+    image.h \
+    zoom.h
 
-FORMS    += image.ui
+FORMS    += \
+    image.ui

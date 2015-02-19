@@ -2,6 +2,9 @@
 #define IMAGE_H
 
 #include <QMainWindow>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QPixmap>
 
 namespace Ui {
 class Image;
@@ -16,8 +19,18 @@ public:
     ~Image();
     void loadImage();
 
+private slots:
+    void on_pushButton_clicked();
+
+    void on_actionClose_Image_triggered();
+
 private:
     Ui::Image *ui;
+    QPixmap picture;
+    QGraphicsScene scene;
+    QString filename;
+
+
 };
 
 #endif // IMAGE_H
