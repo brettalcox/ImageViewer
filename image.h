@@ -20,9 +20,16 @@ public:
     void loadImage();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_loadButton_clicked();
 
     void on_actionClose_Image_triggered();
+
+    void on_actionOpen_Image_triggered();
+
+    void on_closeButton_clicked();
+
+
+    void on_actionQuit_triggered();
 
 private:
     Ui::Image *ui;
