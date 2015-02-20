@@ -3,6 +3,8 @@
 #include "zoom.h"
 #include <QFile>
 #include <QFileDialog>
+#include <fstream>
+#include <sstream>
 
 Image::Image(QWidget *parent) :
     QMainWindow(parent),

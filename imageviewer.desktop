@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=ImageViewer
+Comment= ImageViewer written in Qt
+Exec=./ImageViewer
+Type=Application
+Categories=Graphics;
