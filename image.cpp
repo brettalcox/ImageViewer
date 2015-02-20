@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <fstream>
 #include <sstream>
+#include <math.h>
 
 Image::Image(QWidget *parent) :
     QMainWindow(parent),
@@ -60,4 +61,40 @@ void Image::on_closeButton_clicked()
 void Image::on_actionQuit_triggered()
 {
     QApplication::quit();
+}
+
+void Image::on_rotateButton_clicked()
+{
+    ui->graphicsView->rotate(90);
+}
+
+void Image::on_dial_valueChanged(int value)
+{
+    int difference = previousValue - value;
+    if (value == 0) {
+        if (previousValue == 35) {
+            ui->graphicsView->rotate(10);
+        }
+        else {
+            ui->graphicsView->rotate(350);
+        }
+    }
+    else if (value == 35) {
+        if (previousValue == 0) {
+            ui->graphicsView->rotate(350);
+        }
+        else {
+            ui->graphicsView->rotate(10);
+        }
+    }
+    else {
+        if (difference > 0) {
+            ui->graphicsView->rotate(350);
+        }
+        else if (difference < 0) {
+            ui->graphicsView->rotate(10);
+        }
+    }
+    previousValue = value;
+
 }

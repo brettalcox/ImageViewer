@@ -30,11 +30,16 @@ private slots:
 
     void on_actionQuit_triggered();
 
+    void on_rotateButton_clicked();
+
+    void on_dial_valueChanged(int value);
+
 private:
     Ui::Image *ui;
     QPixmap picture;
     QGraphicsScene scene;
     QString filename;
+    int previousValue = 1;
 
 
 };
