@@ -5,6 +5,8 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QPixmap>
+#include <QMenu>
+#include <QLabel>
 
 namespace Ui {
 class Image;
@@ -18,23 +20,19 @@ public:
     explicit Image(QWidget *parent = 0);
     ~Image();
     void loadImage();
+    void cropImage();
+    void drawLabel();
 
 private slots:
     void on_loadButton_clicked();
-
     void on_actionClose_Image_triggered();
-
     void on_actionOpen_Image_triggered();
-
     void on_closeButton_clicked();
-
     void on_actionQuit_triggered();
-
     void on_rotateButton_clicked();
-
     void on_dial_valueChanged(int value);
-
     void on_saveButton_clicked();
+    void on_selectButton_clicked();
 
 private:
     Ui::Image *ui;
@@ -42,7 +40,6 @@ private:
     QGraphicsScene scene;
     QString filename;
     int previousValue = 1;
-
 
 };
 

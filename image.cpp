@@ -7,6 +7,11 @@
 #include <sstream>
 #include <math.h>
 #include <QGraphicsPixmapItem>
+#include <QMouseEvent>
+#include <QAction>
+#include <QPainter>
+#include <QLabel>
+
 
 Image::Image(QWidget *parent) :
     QMainWindow(parent),
@@ -57,6 +62,8 @@ void Image::on_closeButton_clicked()
 {
     scene.clear();
     ui->graphicsView->resetTransform();
+    QPixmap blank;
+    picture = blank;
 }
 
 void Image::on_actionQuit_triggered()
@@ -142,13 +149,22 @@ void Image::on_saveButton_clicked()
     painter.setRenderHint(QPainter::Antialiasing);
     scene.render(&painter);
     painter.end();
-    image.save("pic.png");
     scene.addPixmap(picture);
 
+    QString newName = QFileDialog::getSaveFileName(this, tr("Save image"), QDir::currentPath(), tr("Image (*.jpg *.png *.bmp)"));
+    //QFile::copy("result.img",newName);
+    //newName.replace(".img",".hdr");
+    //QFile::copy("result.hdr",newName);
+    image.save(newName);
 
 /*
     QPixmap output = QPixmap::grabWidget(ui->graphicsView);
     QImage image = output.toImage();
     image.save("pic.png");
 */
+}
+
+void Image::on_selectButton_clicked()
+{
+    ui->graphicsView->setDragMode(QGraphicsView::ScrollHandDrag);
 }
