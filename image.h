@@ -34,6 +34,8 @@ private slots:
     void on_saveButton_clicked();
     void on_selectButton_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::Image *ui;
     QPixmap picture;

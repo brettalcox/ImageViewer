@@ -73,30 +73,6 @@ void Image::on_actionQuit_triggered()
 
 void Image::on_rotateButton_clicked()
 {
-    /*
-    scene.clear();
-    //ui->graphicsView->rotate(90);
-    QPixmap p(picture);
-    auto item = new QGraphicsPixmapItem(picture);
-    item->setTransformOriginPoint(p.rect().center());
-    item->setRotation(90);
-
-    scene.addItem(item);
-    pictureRotate = item->pixmap();
-    scene.addPixmap(pictureRotate);
-    */
-    //auto sceneRotate = new QGraphicsScene;
-
-    /*
-
-    QMatrix rm;
-    rm.rotate(90);
-    picture = picture.transformed(QPixmap::trueMatrix(rm,picture.width(), picture.height()));
-    scene.clear();
-    ui->graphicsView->setScene(&scene);
-    scene.addPixmap(picture);
-    */
-
     QPixmap rotatedPixmap(picture.height(), picture.width());
     QPainter p(&rotatedPixmap);
     QSize size = picture.size();
@@ -152,19 +128,18 @@ void Image::on_saveButton_clicked()
     scene.addPixmap(picture);
 
     QString newName = QFileDialog::getSaveFileName(this, tr("Save image"), QDir::currentPath(), tr("Image (*.jpg *.png *.bmp)"));
-    //QFile::copy("result.img",newName);
-    //newName.replace(".img",".hdr");
-    //QFile::copy("result.hdr",newName);
     image.save(newName);
-
-/*
-    QPixmap output = QPixmap::grabWidget(ui->graphicsView);
-    QImage image = output.toImage();
-    image.save("pic.png");
-*/
 }
 
 void Image::on_selectButton_clicked()
 {
     ui->graphicsView->setDragMode(QGraphicsView::ScrollHandDrag);
+}
+
+void Image::on_pushButton_clicked()
+{
+    QPixmap croppedImage = QPixmap::grabWidget(ui->graphicsView);
+    scene.clear();
+    picture = croppedImage;
+    scene.addPixmap(picture);
 }

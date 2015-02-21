@@ -17,6 +17,12 @@
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <widget class="QGraphicsView" name="graphicsView">
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
       <property name="sizeAdjustPolicy">
        <enum>QAbstractScrollArea::AdjustIgnored</enum>
       </property>
@@ -32,7 +38,7 @@
        <set>QPainter::Antialiasing|QPainter::HighQualityAntialiasing|QPainter::SmoothPixmapTransform|QPainter::TextAntialiasing</set>
       </property>
       <property name="dragMode">
-       <enum>QGraphicsView::ScrollHandDrag</enum>
+       <enum>QGraphicsView::NoDrag</enum>
       </property>
       <property name="transformationAnchor">
        <enum>QGraphicsView::NoAnchor</enum>
@@ -114,6 +120,11 @@
       <widget class="QPushButton" name="selectButton">
        <property name="text">
         <string>Select Mode</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>Crop Image</string>
        </property>
       </widget>
      </widget>
