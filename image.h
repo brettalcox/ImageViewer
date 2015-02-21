@@ -21,7 +21,7 @@ public:
     ~Image();
     void loadImage();
     void cropImage();
-    void drawLabel();
+    void colorFilter();
 
 private slots:
     void on_loadButton_clicked();
@@ -33,15 +33,19 @@ private slots:
     void on_dial_valueChanged(int value);
     void on_saveButton_clicked();
     void on_selectButton_clicked();
+    void on_cropButton_clicked();
+    void on_comboBox_currentIndexChanged(const QString &arg1);
 
-    void on_pushButton_clicked();
+    void on_resetButton_clicked();
 
 private:
     Ui::Image *ui;
     QPixmap picture;
+    QPixmap originalPicture;
     QGraphicsScene scene;
     QString filename;
     int previousValue = 1;
+    QString filterSelection;
 
 };
 

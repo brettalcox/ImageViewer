@@ -7,11 +7,6 @@
 #include <sstream>
 #include <math.h>
 #include <QGraphicsPixmapItem>
-#include <QMouseEvent>
-#include <QAction>
-#include <QPainter>
-#include <QLabel>
-
 
 Image::Image(QWidget *parent) :
     QMainWindow(parent),
@@ -30,6 +25,7 @@ void Image::loadImage() {
         scene.clear();
         ui->graphicsView->resetTransform();
         picture.load(filename);
+        originalPicture.load(filename);
         ui->graphicsView->setScene(&scene);
         scene.addPixmap(picture);
 
@@ -64,6 +60,8 @@ void Image::on_closeButton_clicked()
     ui->graphicsView->resetTransform();
     QPixmap blank;
     picture = blank;
+    originalPicture = blank;
+    ui->comboBox->setCurrentText("Filter");
 }
 
 void Image::on_actionQuit_triggered()
@@ -136,10 +134,78 @@ void Image::on_selectButton_clicked()
     ui->graphicsView->setDragMode(QGraphicsView::ScrollHandDrag);
 }
 
-void Image::on_pushButton_clicked()
+void Image::on_cropButton_clicked()
 {
     QPixmap croppedImage = QPixmap::grabWidget(ui->graphicsView);
     scene.clear();
     picture = croppedImage;
     scene.addPixmap(picture);
+}
+
+void Image::on_comboBox_currentIndexChanged(const QString &arg1)
+{
+        filterSelection = arg1;
+        colorFilter();
+}
+
+void Image::colorFilter() {
+    if (filterSelection == "Normal") {
+        picture = originalPicture;
+        scene.clear();
+        scene.addPixmap(picture);
+    }
+
+    if (filterSelection == "Grayscale") {
+        picture = originalPicture;
+        QImage image = picture.toImage();
+        QRgb col;
+        int gray;
+        int width = picture.width();
+        int height = picture.height();
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                col = image.pixel(i, j);
+                gray = qGray(col);
+                image.setPixel(i, j, qRgb(gray, gray, gray));
+            }
+        }
+        picture = picture.fromImage(image);
+        scene.clear();
+        scene.addPixmap(picture);
+    }
+
+    if (filterSelection == "Sepia") {
+        picture = originalPicture;
+        QImage image = picture.toImage();
+        int sepiaH, sepiaS, sepiaL;
+        QColor(162,128,101).getHsv( &sepiaH, &sepiaS, &sepiaL );
+        int pixelLuminance;
+        QRgb* rgb;
+        QColor sepiaColor;
+        uchar* scanLine;
+        int width = picture.width();
+        int height = picture.height();
+
+        for (int i = 0; i < height; i++) {
+            scanLine = image.scanLine(i);
+            for (int j = 0; j < width; j++) {
+                rgb = ((QRgb*)scanLine+j);
+                pixelLuminance = (int) (0.2125*qRed(*rgb) + 0.7154*qGreen(*rgb) + 0.0721*qBlue(*rgb));
+                sepiaColor.setHsv(sepiaH, sepiaS, pixelLuminance);
+                *rgb = sepiaColor.rgb();
+            }
+        }
+        scene.clear();
+        picture = picture.fromImage(image);
+        scene.addPixmap(picture);
+
+    }
+}
+
+void Image::on_resetButton_clicked()
+{
+    picture = originalPicture;
+    scene.clear();
+    scene.addPixmap(picture);
+    ui->comboBox->setCurrentText("Filter");
 }
