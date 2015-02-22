@@ -45,6 +45,14 @@ void Image::on_actionClose_Image_triggered()
 {
     scene.clear();
     ui->graphicsView->resetTransform();
+    QPixmap blank;
+    picture = blank;
+    originalPicture = blank;
+    ui->comboBox->setCurrentText("Filter");
+    ui->brightness->setValue(0);
+    ui->blurBox->setCurrentIndex(0);
+    ui->warmBox->setCurrentIndex(0);
+    ui->coolBox->setCurrentIndex(0);
 }
 
 void Image::on_actionOpen_Image_triggered()
@@ -64,6 +72,8 @@ void Image::on_closeButton_clicked()
     ui->comboBox->setCurrentText("Filter");
     ui->brightness->setValue(0);
     ui->blurBox->setCurrentIndex(0);
+    ui->warmBox->setCurrentIndex(0);
+    ui->coolBox->setCurrentIndex(0);
 }
 
 void Image::on_actionQuit_triggered()
