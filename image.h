@@ -7,6 +7,8 @@
 #include <QPixmap>
 #include <QMenu>
 #include <QLabel>
+#include <QUndoStack>
+#include <QUndoCommand>
 
 namespace Ui {
 class Image;
@@ -44,16 +46,22 @@ private slots:
 
     void on_coolBox_currentIndexChanged(int index);
 
+    void on_actionUndo_triggered();
+
+    void on_actionRedo_triggered();
+
 private:
     Ui::Image *ui;
+    QPixmap previousPicture;
     QPixmap picture;
+    QPixmap bufferPicture;
+
     QPixmap originalPicture;
     QGraphicsScene scene;
     QString filename;
     int previousValue = 1;
     int brightnessPrev = 0;
     QString filterSelection;
-
 };
 
 #endif // IMAGE_H

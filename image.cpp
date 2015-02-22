@@ -172,6 +172,7 @@ void Image::colorFilter() {
         filteredImage.grayFilter();
         scene.clear();
         scene.addPixmap(filteredImage.getFilter());
+        previousPicture = picture;
         picture = filteredImage.getFilter();
     }
 
@@ -179,6 +180,7 @@ void Image::colorFilter() {
         filteredImage.sepiaFilter();
         scene.clear();
         scene.addPixmap(filteredImage.getFilter());
+        previousPicture = picture;
         picture = filteredImage.getFilter();
 
     }
@@ -242,6 +244,7 @@ void Image::on_brightness_valueChanged(int value)
 
     scene.clear();
     scene.addPixmap(filteredImage.getFilter());
+    previousPicture = picture;
     picture = filteredImage.getFilter();
 }
 
@@ -252,6 +255,7 @@ void Image::on_blurBox_currentIndexChanged(int index)
     blur.blur(image, image.rect(), index, false);
     scene.clear();
     scene.addPixmap(blur.getFilter());
+    previousPicture = picture;
     picture = blur.getFilter();
 }
 
@@ -261,6 +265,7 @@ void Image::on_warmBox_currentIndexChanged(int index)
     warm.warm(index);
     scene.clear();
     scene.addPixmap(warm.getFilter());
+    previousPicture = picture;
     picture = warm.getFilter();
 }
 
@@ -270,5 +275,20 @@ void Image::on_coolBox_currentIndexChanged(int index)
     cool.cool(index);
     scene.clear();
     scene.addPixmap(cool.getFilter());
+    previousPicture = picture;
     picture = cool.getFilter();
+}
+
+void Image::on_actionUndo_triggered()
+{
+    scene.clear();
+    scene.addPixmap(previousPicture);
+    bufferPicture = picture;
+    picture = previousPicture;
+}
+
+void Image::on_actionRedo_triggered()
+{
+    scene.clear();
+    scene.addPixmap(bufferPicture);
 }
