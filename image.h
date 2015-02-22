@@ -35,8 +35,8 @@ private slots:
     void on_selectButton_clicked();
     void on_cropButton_clicked();
     void on_comboBox_currentIndexChanged(const QString &arg1);
-
     void on_resetButton_clicked();
+    void on_brightnessSlider_sliderMoved(int value);
 
 private:
     Ui::Image *ui;
@@ -45,6 +45,7 @@ private:
     QGraphicsScene scene;
     QString filename;
     int previousValue = 1;
+    int brightnessPrev = 0;
     QString filterSelection;
 
 };

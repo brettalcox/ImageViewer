@@ -15,11 +15,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     image.cpp \
-    zoom.cpp
+    zoom.cpp \
+    filter.cpp
 
 HEADERS  += \
     image.h \
-    zoom.h
+    zoom.h \
+    filter.h
 
 FORMS    += \
     image.ui
