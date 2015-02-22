@@ -36,7 +36,9 @@ private slots:
     void on_cropButton_clicked();
     void on_comboBox_currentIndexChanged(const QString &arg1);
     void on_resetButton_clicked();
-    void on_brightnessSlider_sliderMoved(int value);
+    void on_brightness_valueChanged(int value);
+
+    void on_blurBox_currentIndexChanged(int index);
 
 private:
     Ui::Image *ui;

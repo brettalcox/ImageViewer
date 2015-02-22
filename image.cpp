@@ -7,7 +7,6 @@
 #include <fstream>
 #include <sstream>
 #include <math.h>
-#include <QGraphicsPixmapItem>
 
 Image::Image(QWidget *parent) :
     QMainWindow(parent),
@@ -63,6 +62,8 @@ void Image::on_closeButton_clicked()
     picture = blank;
     originalPicture = blank;
     ui->comboBox->setCurrentText("Filter");
+    ui->brightness->setValue(0);
+    ui->blurBox->setCurrentIndex(0);
 }
 
 void Image::on_actionQuit_triggered()
@@ -154,7 +155,7 @@ void Image::colorFilter() {
 
     if (filterSelection == "Normal") {
         scene.clear();
-        scene.addPixmap(picture);
+        scene.addPixmap(originalPicture);
     }
 
     if (filterSelection == "Grayscale") {
@@ -175,19 +176,21 @@ void Image::colorFilter() {
 
 void Image::on_resetButton_clicked()
 {
+    ui->brightness->setValue(0);
+    ui->blurBox->setCurrentIndex(0);
+    ui->comboBox->setCurrentText("Filter");
+
     picture = originalPicture;
     scene.clear();
     scene.addPixmap(picture);
-    ui->comboBox->setCurrentText("Filter");
-    ui->brightnessSlider->setSliderPosition(0);
 }
 
-void Image::on_brightnessSlider_sliderMoved(int value)
+void Image::on_brightness_valueChanged(int value)
 {
     Filter filteredImage(picture);
 
     int difference = brightnessPrev - value;
-    if (value > 0) {
+    if (value >= 0) {
         if (value == 0) {
             if (brightnessPrev == 1) {
                 filteredImage.changeBrightness(-value);
@@ -205,7 +208,7 @@ void Image::on_brightnessSlider_sliderMoved(int value)
             }
         }
     }
-    else if (value < 0) {
+    else if (value <= 0) {
         if (value == 0) {
             if (brightnessPrev == 1) {
                 filteredImage.changeBrightness(value);
@@ -228,5 +231,14 @@ void Image::on_brightnessSlider_sliderMoved(int value)
     scene.clear();
     scene.addPixmap(filteredImage.getFilter());
     picture = filteredImage.getFilter();
+}
 
+void Image::on_blurBox_currentIndexChanged(int index)
+{
+    QImage image = picture.toImage();
+    Filter blur(picture);
+    blur.blur(image, image.rect(), index, false);
+    scene.clear();
+    scene.addPixmap(blur.getFilter());
+    picture = blur.getFilter();
 }
