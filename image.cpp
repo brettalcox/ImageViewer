@@ -178,6 +178,8 @@ void Image::on_resetButton_clicked()
 {
     ui->brightness->setValue(0);
     ui->blurBox->setCurrentIndex(0);
+    ui->warmBox->setCurrentIndex(0);
+    ui->coolBox->setCurrentIndex(0);
     ui->comboBox->setCurrentText("Filter");
 
     picture = originalPicture;
@@ -241,4 +243,22 @@ void Image::on_blurBox_currentIndexChanged(int index)
     scene.clear();
     scene.addPixmap(blur.getFilter());
     picture = blur.getFilter();
+}
+
+void Image::on_warmBox_currentIndexChanged(int index)
+{
+    Filter warm(picture);
+    warm.warm(index);
+    scene.clear();
+    scene.addPixmap(warm.getFilter());
+    picture = warm.getFilter();
+}
+
+void Image::on_coolBox_currentIndexChanged(int index)
+{
+    Filter cool(picture);
+    cool.cool(index);
+    scene.clear();
+    scene.addPixmap(cool.getFilter());
+    picture = cool.getFilter();
 }

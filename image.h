@@ -40,6 +40,10 @@ private slots:
 
     void on_blurBox_currentIndexChanged(int index);
 
+    void on_warmBox_currentIndexChanged(int index);
+
+    void on_coolBox_currentIndexChanged(int index);
+
 private:
     Ui::Image *ui;
     QPixmap picture;

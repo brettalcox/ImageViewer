@@ -17,6 +17,8 @@ public:
     void sepiaFilter();
     void changeBrightness(int);
     void blur(const QImage& image, const QRect& rect, int radius, bool alphaOnly);
+    void warm(int);
+    void cool(int);
 
 private:
     QPixmap filterPicture;

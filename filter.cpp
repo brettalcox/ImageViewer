@@ -153,3 +153,50 @@ void Filter::blur(const QImage& image, const QRect& rect, int radius, bool alpha
         }
         filterPicture = filterPicture.fromImage(result);
 }
+
+void Filter::warm(int delta) {
+    filterPicture = unfiltered;
+    QImage newImage = filterPicture.toImage();
+    QColor oldColor;
+        int r,g,b;
+
+        for (int x = 0; x < newImage.width(); x++) {
+            for (int y = 0; y < newImage.height(); y++) {
+                oldColor = QColor(filterPicture.toImage().pixel(x,y));
+
+                r = oldColor.red() + delta;
+                g = oldColor.green() + delta;
+                b = oldColor.blue();
+
+                //we check if the new values are between 0 and 255
+                r = qBound(0, r, 255);
+                g = qBound(0, g, 255);
+
+                newImage.setPixel(x,y, qRgb(r,g,b));
+            }
+        }
+        filterPicture = filterPicture.fromImage(newImage);
+}
+
+void Filter::cool(int delta) {
+    filterPicture = unfiltered;
+    QImage newImage = filterPicture.toImage();
+    QColor oldColor;
+        int r,g,b;
+
+        for (int x = 0; x < newImage.width(); x++){
+            for (int y = 0; y < newImage.height(); y++){
+                oldColor = QColor(filterPicture.toImage().pixel(x,y));
+
+                r = oldColor.red();
+                g = oldColor.green();
+                b = oldColor.blue()+delta;
+
+                //we check if the new value is between 0 and 255
+                b = qBound(0, b, 255);
+
+                newImage.setPixel(x,y, qRgb(r,g,b));
+            }
+        }
+        filterPicture = filterPicture.fromImage(newImage);
+}

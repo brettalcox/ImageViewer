@@ -242,6 +242,230 @@
         </property>
        </item>
       </widget>
+      <widget class="QComboBox" name="warmBox">
+       <item>
+        <property name="text">
+         <string>Warm</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>10</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QComboBox" name="coolBox">
+       <item>
+        <property name="text">
+         <string>Cool</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>-1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>10</string>
+        </property>
+       </item>
+      </widget>
       <widget class="QSpinBox" name="brightness">
        <property name="minimum">
         <number>-20</number>
