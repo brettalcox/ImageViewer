@@ -312,24 +312,28 @@ void Image::on_coolBox_currentIndexChanged(int index)
 
 void Image::on_actionUndo_triggered()
 {
-    scene.clear();
+    //scene.clear();
     //scene.addPixmap(previousPicture);
     //bufferPicture = picture;
     //picture = previousPicture;
     //list.resetToFront();
     list.advItrFor();
-    scene.addPixmap(list.getNode());
-    picture = list.getNode();
+    if (list.hasNextItem()) {
+        scene.clear();
+        scene.addPixmap(list.getNode());
+        picture = list.getNode();
+    }
 
 }
 
 void Image::on_actionRedo_triggered()
 {
-    scene.clear();
-    //scene.addPixmap(bufferPicture);
     list.advItrBack();
-    scene.addPixmap(list.getNode());
-    picture = list.getNode();
+    if (list.hasNextItem()) {
+        scene.clear();
+        scene.addPixmap(list.getNode());
+        picture = list.getNode();
+    }
 
 }
 

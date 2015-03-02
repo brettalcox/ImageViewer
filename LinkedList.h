@@ -18,7 +18,6 @@ public:
 	void addToFront(const E& e);
 	void removeFromFront();
 	bool isEmpty() const;
-
 	void resetToFront();
 	void resetToEnd();
 	bool hasNextItem();
@@ -30,8 +29,6 @@ public:
 	Node<E>* insertionSort(Node<E>* head);
 	Node<E>* getHead();
 	Node<E>* retrieve(int index);
-
-
 
 private:
 	Node<E>* head;
