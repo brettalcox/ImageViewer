@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 CONFIG += c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -16,12 +16,17 @@ TEMPLATE = app
 SOURCES += main.cpp \
     image.cpp \
     zoom.cpp \
-    filter.cpp
+    filter.cpp \
+    loadurl.cpp
 
 HEADERS  += \
     image.h \
     zoom.h \
-    filter.h
+    filter.h \
+    loadurl.h \
+    LinkedList.h \
+    Node.h
 
 FORMS    += \
-    image.ui
+    image.ui \
+    loadurl.ui

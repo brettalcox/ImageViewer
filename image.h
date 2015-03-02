@@ -39,16 +39,12 @@ private slots:
     void on_comboBox_currentIndexChanged(const QString &arg1);
     void on_resetButton_clicked();
     void on_brightness_valueChanged(int value);
-
     void on_blurBox_currentIndexChanged(int index);
-
     void on_warmBox_currentIndexChanged(int index);
-
     void on_coolBox_currentIndexChanged(int index);
-
     void on_actionUndo_triggered();
-
     void on_actionRedo_triggered();
+    void on_loadUrl_clicked();
 
 private:
     Ui::Image *ui;
@@ -59,7 +55,7 @@ private:
     QPixmap originalPicture;
     QGraphicsScene scene;
     QString filename;
-    int previousValue = 1;
+    int previousValue = 0;
     int brightnessPrev = 0;
     QString filterSelection;
 };

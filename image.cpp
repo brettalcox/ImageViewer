@@ -1,5 +1,7 @@
 #include "image.h"
 #include "ui_image.h"
+#include "ui_loadurl.h"
+#include "loadurl.h"
 #include "zoom.h"
 #include "filter.h"
 #include <QFile>
@@ -7,6 +9,9 @@
 #include <fstream>
 #include <sstream>
 #include <math.h>
+
+#include "LinkedList.h"
+#include "Node.h"
 
 Image::Image(QWidget *parent) :
     QMainWindow(parent),
@@ -20,6 +25,8 @@ Image::~Image()
     delete ui;
 }
 
+LinkedList<QPixmap> list;
+
 void Image::loadImage() {
 
         scene.clear();
@@ -31,6 +38,9 @@ void Image::loadImage() {
 
         Graphics_view_zoom* z = new Graphics_view_zoom(ui->graphicsView);
         z->set_modifiers(Qt::NoModifier);
+
+        list.createList(picture);
+        list.resetToFront();
 
 }
 
@@ -94,6 +104,9 @@ void Image::on_rotateButton_clicked()
     picture = rotatedPixmap;
     scene.clear();
     scene.addPixmap(picture);
+
+    list.addToFront(picture);
+    list.resetToFront();
 }
 
 void Image::on_dial_valueChanged(int value)
@@ -152,12 +165,18 @@ void Image::on_cropButton_clicked()
     scene.clear();
     picture = croppedImage;
     scene.addPixmap(picture);
+
+    list.addToFront(picture);
+    list.resetToFront();
 }
 
 void Image::on_comboBox_currentIndexChanged(const QString &arg1)
 {
         filterSelection = arg1;
         colorFilter();
+
+        list.addToFront(picture);
+        list.resetToFront();
 }
 
 void Image::colorFilter() {
@@ -246,6 +265,9 @@ void Image::on_brightness_valueChanged(int value)
     scene.addPixmap(filteredImage.getFilter());
     previousPicture = picture;
     picture = filteredImage.getFilter();
+
+    list.addToFront(picture);
+    list.resetToFront();
 }
 
 void Image::on_blurBox_currentIndexChanged(int index)
@@ -257,6 +279,9 @@ void Image::on_blurBox_currentIndexChanged(int index)
     scene.addPixmap(blur.getFilter());
     previousPicture = picture;
     picture = blur.getFilter();
+
+    list.addToFront(picture);
+    list.resetToFront();
 }
 
 void Image::on_warmBox_currentIndexChanged(int index)
@@ -267,6 +292,9 @@ void Image::on_warmBox_currentIndexChanged(int index)
     scene.addPixmap(warm.getFilter());
     previousPicture = picture;
     picture = warm.getFilter();
+
+    list.addToFront(picture);
+    list.resetToFront();
 }
 
 void Image::on_coolBox_currentIndexChanged(int index)
@@ -277,18 +305,46 @@ void Image::on_coolBox_currentIndexChanged(int index)
     scene.addPixmap(cool.getFilter());
     previousPicture = picture;
     picture = cool.getFilter();
+
+    list.addToFront(picture);
+    list.resetToFront();
 }
 
 void Image::on_actionUndo_triggered()
 {
     scene.clear();
-    scene.addPixmap(previousPicture);
-    bufferPicture = picture;
-    picture = previousPicture;
+    //scene.addPixmap(previousPicture);
+    //bufferPicture = picture;
+    //picture = previousPicture;
+    //list.resetToFront();
+    list.advItrFor();
+    scene.addPixmap(list.getNode());
+    picture = list.getNode();
+
 }
 
 void Image::on_actionRedo_triggered()
 {
     scene.clear();
-    scene.addPixmap(bufferPicture);
+    //scene.addPixmap(bufferPicture);
+    list.advItrBack();
+    scene.addPixmap(list.getNode());
+    picture = list.getNode();
+
+}
+
+void Image::on_loadUrl_clicked()
+{
+    LoadUrl url;
+    url.downloadImageFile(ui->urlLine->text());
+
+    scene.clear();
+    ui->graphicsView->resetTransform();
+    ui->graphicsView->setScene(&scene);
+    scene.addPixmap(url.returnImage());
+    picture = url.returnImage();
+
+    Graphics_view_zoom* z = new Graphics_view_zoom(ui->graphicsView);
+    z->set_modifiers(Qt::NoModifier);
+
 }
